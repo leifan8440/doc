@@ -82,11 +82,9 @@
        @Types - An array of Types we want to cure ie: { "Poison", "Disease" } - Let it blanck for normal healers, use it for other specs as they cant use on magic.
     function Unit:CanDispel(Types, Offensive) -- 新参数功能 进攻驱散, Types除了术士法师以外都不需要传入了, 自动根据专精判断
 
-    16.返回一个能驱散的Unit, 进攻驱散时返回血量最高的, 防御驱散返回血量百分比最低的
+    17.返回一个能驱散的Unit, 进攻驱散时返回血量最高的, 防御驱散返回血量百分比最低的
     Types除了术士法师以外都不需要传入了, 自动根据专精判断
     function Unit.Dispel (Table, Spell, Types, Offensive, PetDispel) -- 新参数功能 进攻驱散,是否宠物
-
-    17. AddPresetOption("Cooldown", "使用精华", nil,nil,nil,"防御") -- 增加第6个参数, 加到哪一页
 
     18.function Spell:EssenceMinorEnabled() -- 精华的副能力是否启用, 没有返回false , 有返回等级
 
@@ -138,9 +136,11 @@
 
     26. Rotation.Msg = "测试"
         Rotation.Msg 会加到帮助信息的最前面
-        
+
     27. 显示可复制粘贴的的文本, 就是帮助信息那样的
     LibCopyPaste:Copy("帮助信息", "123456", { readOnly = true })
+
+    28.AddPresetOption("Cooldown", "使用精华", nil,nil,nil,"防御") -- 增加第6个参数, 加到哪一页
 
  ]]
 
@@ -184,18 +184,25 @@
     如果同职业多专精放到一个自定义里,那么第二个开始必须手动指定UUID
     
     -- 第一个
+    local success, error = pcall(function() 
     local Rotation = SetRotation(102, {}, TitleName, ProfileID)
     function Rotation:Initialize()
     function Rotation:Events()
     function Rotation:Pulse()
+    end)
+    if not success then print(error) end
     -- 第一个结束
 
     -- 第二个
+    local success, error = pcall(function() 
     local Rotation = SetRotation(103, {UUID = 4643635435}, TitleName, ProfileID)
     function Rotation:Initialize()
     function Rotation:Events()
     function Rotation:Pulse()
+    end)
+    if not success then print(error) end
+    -- 第二个结束
 
-
+    pcall的作用是防止格式,语法问题造成整个盒子不载入
      ]]
 
