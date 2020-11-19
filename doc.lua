@@ -142,8 +142,24 @@
 
     28.AddPresetOption("Cooldown", "使用精华", nil,nil,nil,"防御") -- 增加第6个参数, 加到哪一页
 
- ]]
+    29. 魂契相关的技能 soulbind.xxx.enabled ,使用Spell:Exists() , 不能用IsLearned()
 
+    30.橙装识别 Spell为橙装法术效果 https://cn.wowhead.com/spells/legendary-item-effects
+    function Spell:LegendaryExists()
+
+    -- 导灵器识别  https://cn.wowhead.com/spells/soulbind-conduits
+    function Spell:ConduitRank()
+    function Spell:ConduitEnabled()
+
+    -- 盟约ID  1格里恩 2温西尔 3法夜 4通灵领主
+    Player.CovenantID
+
+    Player.CovenantName -- 盟约名字
+    Player.SoulbindID -- 灵魂羁绊人物ID  魂契? 不知道官方翻译
+    Player.SoulbindName -- 灵魂羁绊人物名字
+
+ ]]
+ 
 
  --[[
     部分有用的变量
@@ -205,4 +221,3 @@
 
     pcall的作用是防止格式,语法问题造成整个盒子不载入
      ]]
-
