@@ -59,7 +59,9 @@
     12.Spell:IsLearned() 法术是否存在
     通过"SPELLS_CHANGED"事件触发,扫描天赋/技能书
     比Spell:Exists()更准确, 比如天赋技能B替换了原始技能A,但是技能A仍然Exists,或者技能B一直not Exists,还有战斗中会动态改变ID的技能,比如生存的野火炸弹,暗牧的虚空爆发/虚空箭等等
-   
+    但也是有坑, 对于一些由buff触发带来的技能, 不识别
+    魂契天赋树里的法术要用Spell:Exists()
+
     13.全局的HardISCL, 这两个技能会先施法再引导,施法的时候GCD就转完了,导致接下来的引导过程被打断
     必须在HardISCL里加入, 以便施法时暂停循环
     HardISCL =  {
@@ -158,6 +160,12 @@
     Player.SoulbindID -- 灵魂羁绊人物ID  魂契? 不知道官方翻译
     Player.SoulbindName -- 灵魂羁绊人物名字
 
+    31.新函数, 心能
+    Player:BuffMaw(Spell, Index)
+    Player:BuffCountMaw(Spell)
+
+    循环里用要先if IsInJailersTower()
+    因为只在塔里才刷新
  ]]
  
 
