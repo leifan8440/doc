@@ -82,10 +82,11 @@
 
     16.Returns True if the unit should be dispelled
        @Types - An array of Types we want to cure ie: { "Poison", "Disease" } - Let it blanck for normal healers, use it for other specs as they cant use on magic.
-    function Unit:CanDispel(Types, Offensive) -- 新参数功能 进攻驱散, Types除了术士法师以外都不需要传入了, 自动根据专精判断
+       Types = { "Poison", "Disease", "Magic", "Curse", "" } 中毒, 疾病, 魔法, 诅咒, ""空字符串, 激怒
+    function Unit:CanDispel(Types, Offensive) -- 新参数功能 进攻驱散, Types除了术士法师以外都可以直接传入nil, 自动根据专精判断
 
     17.返回一个能驱散的Unit, 进攻驱散时返回血量最高的, 防御驱散返回血量百分比最低的
-    Types除了术士法师以外都不需要传入了, 自动根据专精判断
+    Types除了术士法师以外都可以直接传入nil, 自动根据专精判断
     function Unit.Dispel (Table, Spell, Types, Offensive, PetDispel) -- 新参数功能 进攻驱散,是否宠物
 
     18.function Spell:EssenceMinorEnabled() -- 精华的副能力是否启用, 没有返回false , 有返回等级
@@ -138,11 +139,14 @@
 
     26. Rotation.Msg = "测试"
         Rotation.Msg 会加到帮助信息的最前面
+        换行要用\n
 
     27. 显示可复制粘贴的的文本, 就是帮助信息那样的
     LibCopyPaste:Copy("帮助信息", "123456", { readOnly = true })
 
-    28.AddPresetOption("Cooldown", "使用精华", nil,nil,nil,"防御") -- 增加第6个参数, 加到哪一页
+    28.AddPresetOption("Cooldown", "使用精华", nil,nil,nil,"防御", "使用项链技能")
+    增加第6个参数, 加到哪一页
+    增加第7个参数, 选项说明Tooltip
 
     29. 魂契相关的技能 soulbind.xxx.enabled ,使用Spell:Exists() , 不能用IsLearned()
 
